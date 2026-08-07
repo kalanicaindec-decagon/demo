@@ -122,16 +122,46 @@ function initConfirm() {
   if (state.dob && dob) dob.value = state.dob;
 }
 
-/* ---------- interstitial ---------- */
+/* ---------- sign in ---------- */
 
-function initChecking() {
-  const page = document.getElementById('checking-page');
+function initAuth() {
+  const form = document.getElementById('auth-form');
+  if (!form) return;
+
+  const next = form.getAttribute('data-next');
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const email = document.getElementById('auth-email').value.trim();
+    const password = document.getElementById('auth-password').value.trim();
+    const error = document.getElementById('auth-error');
+
+    /* Any non-empty pair is accepted. Gating a live demo on an exact password
+       match is a needless way to lose a take. */
+    if (!email || !password) {
+      error.textContent = 'Enter your email and password to sign in.';
+      error.hidden = false;
+      return;
+    }
+
+    writeState({ email: email });
+    goTo(next + '/');
+  });
+}
+
+/* ---------- interstitials ---------- */
+
+/* Any page carrying data-autonext advances on its own. The real flow quotes
+   45 seconds for the coverage check; a short delay keeps hold time on a live
+   call tolerable while still showing the screen on camera. */
+function initAutoAdvance() {
+  const page = document.querySelector('[data-autonext]');
   if (!page) return;
 
-  /* The real flow quotes 45 seconds. 1.6s keeps a live voice demo tolerable
-     while still showing the interstitial on camera. */
-  const next = page.getAttribute('data-next');
-  setTimeout(function () { goTo(next + '/'); }, 1600);
+  const next = page.getAttribute('data-autonext');
+  const delay = parseInt(page.getAttribute('data-delay'), 10) || 1600;
+  setTimeout(function () { goTo(next + '/'); }, delay);
 }
 
 /* ---------- result ---------- */
@@ -192,6 +222,7 @@ document.addEventListener('DOMContentLoaded', function () {
   initOptions();
   initStepForm();
   initConfirm();
-  initChecking();
+  initAuth();
+  initAutoAdvance();
   renderCovered();
 });

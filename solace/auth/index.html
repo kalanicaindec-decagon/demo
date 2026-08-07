@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Sign in | Solace Health</title>
+<link rel="stylesheet" href="../../assets/solace.css">
+</head>
+<body>
+
+<div class="auth-page">
+  <div class="auth-card">
+    <div class="logo-mark">S</div>
+
+    <h1 class="auth-title">Sign in</h1>
+    <p class="auth-sub">Use the email address associated with your Solace account.</p>
+
+    <form class="auth-form" id="auth-form" data-next="loading" data-testid="auth-form" novalidate>
+      <div class="auth-error" id="auth-error" data-testid="auth-error" hidden></div>
+
+      <div class="s-field">
+        <label for="auth-email">Email</label>
+        <input class="s-input" type="text" id="auth-email" name="email"
+               data-testid="auth-email" autocomplete="off" placeholder="you@example.com">
+      </div>
+
+      <div class="s-field">
+        <label for="auth-password">Password</label>
+        <input class="s-input" type="password" id="auth-password" name="password"
+               data-testid="auth-password" autocomplete="off" placeholder="••••••••••">
+      </div>
+
+      <button type="submit" class="cta cta-full" id="auth-submit" data-testid="auth-submit">
+        Continue
+      </button>
+    </form>
+
+    <p class="auth-foot"><a href="#">Forgot your password?</a></p>
+  </div>
+</div>
+
+<script src="../../assets/data.js"></script>
+<script src="../../assets/solace.js"></script>
+</body>
+</html>

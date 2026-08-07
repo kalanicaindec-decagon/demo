@@ -276,6 +276,197 @@ select.s-input {
   padding: 20px 0 26px;
 }
 
+/* ---------- chooser: "I am a…" (app.solace.health/login) ---------- */
+
+.chooser {
+  position: relative;
+  min-height: 100vh;
+  background: var(--cream);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 70px 24px;
+}
+
+/* Oversized wordmark ghosted into the background, as on the real page. */
+.chooser-watermark {
+  position: absolute;
+  left: 50%;
+  bottom: -8%;
+  transform: translateX(-50%);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(220px, 36vw, 540px);
+  line-height: 0.78;
+  color: #f8f1e2;
+  white-space: nowrap;
+  user-select: none;
+  pointer-events: none;
+}
+
+.chooser-curves {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(560px, 46vw);
+  pointer-events: none;
+  opacity: 0.75;
+}
+
+.chooser-label {
+  position: relative;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 25px;
+  color: #2a3a32;
+  margin-bottom: 26px;
+}
+
+.choices {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 516px;
+}
+
+.choice {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 148px;
+  padding: 30px 36px;
+  border: none;
+  border-radius: 16px;
+  font-family: inherit;
+  text-align: left;
+  text-decoration: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+.choice-patient {
+  background: linear-gradient(102deg, #23503f 0%, #3d6842 44%, #a9bb5d 100%);
+}
+
+.choice-advocate {
+  background: linear-gradient(102deg, #1b4435 0%, #245240 100%);
+}
+
+.choice-title {
+  position: relative;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 46px;
+  line-height: 1;
+  margin-bottom: 7px;
+}
+
+.choice-sub { position: relative; font-size: 19px; }
+.choice-sub em { font-family: "Playfair Display", Georgia, serif; font-style: italic; }
+
+.choice-art {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  pointer-events: none;
+}
+
+@media (max-width: 560px) {
+  .choice-title { font-size: 34px; }
+  .choice { min-height: 120px; padding: 24px 26px; }
+}
+
+/* ---------- auth cards (welcome.solace.health) ---------- */
+
+.auth-page {
+  min-height: 100vh;
+  padding: 48px 24px;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(125% 95% at 16% 80%, #618a5b 0%, #35674d 38%, #1f4837 74%, #173a2e 100%);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 40px 40px 34px;
+  text-align: center;
+  box-shadow: 0 22px 64px rgba(0, 0, 0, 0.24);
+}
+
+.auth-card .logo-mark { margin: 0 auto 26px; }
+
+.auth-card.is-tall {
+  min-height: 540px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.auth-title {
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 1.15;
+  color: var(--green-deep);
+  margin: 0 0 11px;
+}
+
+.auth-sub {
+  font-size: 15.5px;
+  color: var(--ink-soft);
+  margin: 0 0 28px;
+  line-height: 1.5;
+}
+
+.auth-foot {
+  margin-top: 19px;
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+
+.auth-foot a {
+  color: var(--green-deep);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.auth-foot a:hover { text-decoration: underline; }
+
+.auth-form { text-align: left; }
+
+.auth-error {
+  background: #fbeceb;
+  border: 1px solid #e6bfbb;
+  color: #96322a;
+  border-radius: 9px;
+  padding: 10px 13px;
+  font-size: 14px;
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.spinner {
+  width: 26px;
+  height: 26px;
+  margin: auto 0 30px;
+  border: 3px solid #e2eae1;
+  border-top-color: var(--green-soft);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.auth-note { font-size: 15px; color: var(--ink-soft); margin: 0; }
+
 /* ---------- intake (dark split) ---------- */
 
 .intake {
