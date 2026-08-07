@@ -13,8 +13,10 @@ const MERIDIAN_MEMBERS = {
     dob: '03/14/1952',
     age: 74,
     gender: 'F',
+    email: 'dolores.whitfield@example.com',
     address: '1418 Larkspur Ave, Apt 3B',
     cityStateZip: 'Oakland, CA 94610',
+    state: 'California',
     phone: '(510) 555-0148',
     coverage: {
       status: 'ACTIVE',
@@ -121,8 +123,10 @@ const MERIDIAN_MEMBERS = {
     dob: '11/02/1948',
     age: 77,
     gender: 'M',
+    email: 'arthur.beaumont@example.com',
     address: '922 Sutter Ridge Rd',
     cityStateZip: 'Berkeley, CA 94708',
+    state: 'California',
     phone: '(510) 555-0273',
     coverage: {
       status: 'ACTIVE',
@@ -203,8 +207,10 @@ const MERIDIAN_MEMBERS = {
     dob: '07/19/1955',
     age: 71,
     gender: 'F',
+    email: 'ruth.callahan@example.com',
     address: '57 Mariposa Ln',
     cityStateZip: 'Alameda, CA 94501',
+    state: 'California',
     phone: '(510) 555-0466',
     coverage: {
       status: 'TERMINATED',

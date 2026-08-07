@@ -15,6 +15,7 @@ Static HTML, CSS and vanilla JS. No build step, no dependencies, no framework.
 | `portal/` | **Meridian Advantage Provider Portal** — the browser action target |
 | `solace/` | Replica of the captured Solace journey: chooser → sign in → eligibility wizard → covered |
 | `SELECTORS.md` | Every selector, extraction hook, and the sign-in credentials. Paste this with your recorded script. |
+| `DEMO-DATA.md` | Every value you'll type while recording, both journeys, field by field. Keep it open on a second screen. |
 
 Credentials are deliberately **not** shown on any login screen — they're in
 `SELECTORS.md`. Both forms accept any non-empty pair, so nothing here is a real secret.
