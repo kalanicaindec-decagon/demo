@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Solace</title>
+<link rel="stylesheet" href="../assets/solace.css">
+</head>
+<body>
+
+<div class="intake">
+  <div>
+    <div class="intake-kicker">Welcome to</div>
+    <div class="intake-wordmark">Solace</div>
+    <h1>Your first step toward a better healthcare experience.</h1>
+    <p class="lede">
+      We just need a few details to get the process started.
+      We’ll also make sure you’re covered by insurance!
+    </p>
+    <div class="social-proof">
+      <div class="avatars"><span>RW</span><span>JT</span><span>MP</span></div>
+      <p>Join over 45,000 patients and families getting better care with the help of a patient advocate</p>
+    </div>
+  </div>
+
+  <div class="intake-card">
+    <form id="step-form" data-next="medicare" data-testid="intake-form" novalidate>
+
+      <div class="s-field">
+        <label>Who do you need help for? <span class="req">*</span></label>
+        <div class="radio-row">
+          <label class="radio-item">
+            <input type="radio" name="helpFor" value="Myself" id="help-for-myself"
+                   data-testid="help-for-myself" checked> Myself
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="helpFor" value="Someone Else" id="help-for-someone-else"
+                   data-testid="help-for-someone-else"> Someone Else
+          </label>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="s-field">
+          <label for="firstName">First Name <span class="req">*</span></label>
+          <input class="s-input" type="text" id="firstName" name="firstName"
+                 data-testid="first-name" autocomplete="off">
+        </div>
+        <div class="s-field">
+          <label for="lastName">Last Name <span class="req">*</span></label>
+          <input class="s-input" type="text" id="lastName" name="lastName"
+                 data-testid="last-name" autocomplete="off">
+        </div>
+      </div>
+
+      <div class="s-field">
+        <label for="email">Email <span class="req">*</span></label>
+        <input class="s-input" type="text" id="email" name="email"
+               data-testid="email" autocomplete="off">
+      </div>
+
+      <div class="s-field">
+        <label for="dob">Date of Birth <span class="req">*</span></label>
+        <input class="s-input" type="text" id="dob" name="dob"
+               data-testid="dob" placeholder="MM/DD/YYYY" autocomplete="off">
+      </div>
+
+      <button type="submit" class="cta cta-full" id="step-continue" data-testid="intake-submit">
+        Get Started <span aria-hidden="true">→</span>
+      </button>
+    </form>
+  </div>
+</div>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/solace.js"></script>
+</body>
+</html>

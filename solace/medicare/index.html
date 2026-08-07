@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Solace</title>
+<link rel="stylesheet" href="../../assets/solace.css">
+</head>
+<body>
+
+<div class="wizard">
+  <div class="wizard-top">
+    <a class="back-link" href="../" data-testid="back">‹ Back</a>
+    <div class="logo-mark">S</div>
+  </div>
+  <div class="progress"><div class="progress-fill" style="width:16%"></div></div>
+
+  <div class="wizard-body">
+    <form id="step-form" data-next="location" novalidate>
+      <h1 class="step-title">Let’s start by finding your benefits.<br>Do you have Medicare?</h1>
+
+      <div class="step-error" id="step-error" hidden>Please choose an answer to continue.</div>
+
+      <div class="options" id="option-group" data-key="hasMedicare">
+        <button type="button" class="option" data-value="Yes" aria-pressed="false"
+                id="option-yes" data-testid="option-yes">
+          Yes <span class="check">✓</span>
+        </button>
+        <button type="button" class="option" data-value="No" aria-pressed="false"
+                id="option-no" data-testid="option-no">
+          No <span class="check">✓</span>
+        </button>
+      </div>
+
+      <div class="cta-wrap">
+        <button type="submit" class="cta" id="step-continue" data-testid="continue">Continue</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="secure-note">🔒 All information you share is secure and confidential</div>
+</div>
+
+<script src="../../assets/data.js"></script>
+<script src="../../assets/solace.js"></script>
+</body>
+</html>

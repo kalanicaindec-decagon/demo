@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Browser Actions Demo — Solace / Meridian Advantage</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: #0f1a24;
+    color: #dbe6ef;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.6;
+    padding: 56px 24px 80px;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; }
+  h1 { font-size: 27px; margin: 0 0 8px; color: #fff; font-weight: 600; }
+  .kicker {
+    text-transform: uppercase; letter-spacing: 2px; font-size: 11px;
+    color: #6f8ba3; margin-bottom: 10px;
+  }
+  p.lede { color: #9db2c6; margin: 0 0 36px; font-size: 15px; }
+  .card {
+    display: block; background: #16242f; border: 1px solid #24384a;
+    border-radius: 10px; padding: 22px 24px; margin-bottom: 16px;
+    text-decoration: none; color: inherit; transition: border-color .15s, background .15s;
+  }
+  .card:hover { border-color: #3d6382; background: #1a2b38; }
+  .card h2 { margin: 0 0 5px; font-size: 17px; color: #fff; font-weight: 600; }
+  .card .tag {
+    display: inline-block; font-size: 10.5px; text-transform: uppercase;
+    letter-spacing: 1.1px; padding: 2px 8px; border-radius: 3px; margin-left: 9px;
+    vertical-align: 2px; font-weight: 700;
+  }
+  .tag-primary { background: #0d9488; color: #04241f; }
+  .tag-optional { background: #2c4358; color: #9dc0dc; }
+  .card p { margin: 0; color: #93a9bd; font-size: 14px; }
+  .card code, .ref code {
+    font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 12.5px;
+    background: #0d1720; border: 1px solid #24384a; padding: 1px 6px;
+    border-radius: 3px; color: #7fd4c2;
+  }
+  .ref {
+    background: #16242f; border: 1px solid #24384a; border-radius: 10px;
+    padding: 20px 24px; margin-top: 30px;
+  }
+  .ref h3 {
+    margin: 0 0 12px; font-size: 11px; text-transform: uppercase;
+    letter-spacing: 1.4px; color: #6f8ba3; font-weight: 700;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  th, td { text-align: left; padding: 7px 10px 7px 0; border-bottom: 1px solid #22333f; }
+  th { color: #6f8ba3; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: .9px; }
+  td { color: #b9cad9; }
+  tr:last-child td { border-bottom: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker">Decagon Browser Actions · Demo Environment</div>
+  <h1>Solace × Meridian Advantage</h1>
+  <p class="lede">
+    Mock systems for a voice-driven browser action demo. A caller asks about coverage;
+    the agent signs into the payor portal, looks the member up by MBI, and reads back
+    eligibility and claim status.
+  </p>
+
+  <a class="card" href="portal/">
+    <h2>Meridian Advantage Provider Portal<span class="tag tag-primary">Browser action target</span></h2>
+    <p>
+      Sign in → member search by MBI → eligibility &amp; benefits → claim history → claim detail.
+      This is what the browser action drives during the call.
+    </p>
+  </a>
+
+  <a class="card" href="solace/">
+    <h2>Solace Eligibility Check<span class="tag tag-optional">Optional second act</span></h2>
+    <p>
+      Replica of the find.solace.health wizard, carried through to the coverage-confirmed
+      state. Useful if you want to show the agent completing intake with the MBI it just retrieved.
+    </p>
+  </a>
+
+  <div class="ref">
+    <h3>Demo reference</h3>
+    <table>
+      <tr><th>Portal credentials</th><td><code>solace_svc</code> / <code>Advocate2026!</code> — any non-empty pair works</td></tr>
+      <tr><th>Primary member</th><td><code>1EG4TE5MK73</code> · Dolores Whitfield · 03/14/1952 · Active PPO, 3 claims</td></tr>
+      <tr><th>All claims paid</th><td><code>2XW9HK4NP12</code> · Arthur Beaumont · 11/02/1948 · Active HMO</td></tr>
+      <tr><th>Terminated</th><td><code>4TQ6MC8RV30</code> · Ruth Callahan · 07/19/1955 · Termed 05/31/2026</td></tr>
+      <tr><th>Denied claim</th><td><code>CLM-2026-091203</code> · MRI, CO-197 prior auth absent</td></tr>
+    </table>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Sign In | Meridian Advantage Provider Portal</title>
+<link rel="stylesheet" href="../assets/portal.css">
+</head>
+<body>
+
+<div class="masthead">
+  <div class="masthead-inner">
+    <a class="brand" href="./">
+      <div class="brand-mark">MA</div>
+      <div>
+        <div class="brand-name">Meridian Advantage Health Plan</div>
+        <div class="brand-sub">Provider &amp; Advocate Portal</div>
+      </div>
+    </a>
+    <div class="masthead-right">
+      <span>Support: (855) 555-0170</span>
+    </div>
+  </div>
+</div>
+
+<div class="login-page">
+  <div class="login-card">
+    <div class="card-head">Secure Sign In</div>
+    <div class="login-body">
+
+      <div class="demo-creds">
+        <strong>Demonstration environment.</strong><br>
+        Service account <code>solace_svc</code> &nbsp;·&nbsp; password <code>Advocate2026!</code>
+      </div>
+
+      <form id="login-form" data-testid="login-form" novalidate>
+        <div class="inline-error" id="login-error" data-testid="login-error" hidden></div>
+
+        <div class="field">
+          <label for="username">Username <span class="req">*</span></label>
+          <input type="text" id="username" name="username" data-testid="username"
+                 autocomplete="off" placeholder="Enter your username">
+        </div>
+
+        <div class="field">
+          <label for="password">Password <span class="req">*</span></label>
+          <input type="password" id="password" name="password" data-testid="password"
+                 autocomplete="off" placeholder="Enter your password">
+        </div>
+
+        <button type="submit" class="btn" id="login-submit" data-testid="login-submit"
+                style="width:100%">Sign In</button>
+      </form>
+
+      <div class="login-legal">
+        This system is restricted to authorized users conducting plan business. Access is
+        monitored and logged. Protected health information accessed through this portal is
+        subject to HIPAA. Unauthorized use may result in termination of access and civil or
+        criminal penalties.
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/portal.js"></script>
+</body>
+</html>

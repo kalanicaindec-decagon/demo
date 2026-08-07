@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Solace</title>
+<link rel="stylesheet" href="../../assets/solace.css">
+</head>
+<body>
+
+<div class="wizard">
+  <div class="wizard-top">
+    <a class="back-link" href="../location/" data-testid="back">‹ Back</a>
+    <div class="logo-mark">S</div>
+  </div>
+  <div class="progress"><div class="progress-fill" style="width:60%"></div></div>
+
+  <div class="wizard-body">
+    <form id="step-form" data-next="confirm" novalidate>
+      <h1 class="step-title">Do you have a Medicare Advantage plan?</h1>
+      <p class="step-sub">We need a bit more information to find your benefits.</p>
+
+      <div class="step-error" id="step-error" hidden>Please choose an answer to continue.</div>
+
+      <div class="options" id="option-group" data-key="hasAdvantage">
+        <button type="button" class="option" data-value="Yes" aria-pressed="false"
+                id="option-yes" data-testid="option-yes">
+          Yes <span class="check">✓</span>
+        </button>
+        <button type="button" class="option" data-value="No" aria-pressed="false"
+                id="option-no" data-testid="option-no">
+          No <span class="check">✓</span>
+        </button>
+        <button type="button" class="option" data-value="Not sure" aria-pressed="false"
+                id="option-not-sure" data-testid="option-not-sure">
+          Not sure <span class="check">✓</span>
+        </button>
+      </div>
+
+      <a class="help-link" href="#">What’s a Medicare Advantage Plan? <span aria-hidden="true">→</span></a>
+
+      <div class="cta-wrap">
+        <button type="submit" class="cta" id="step-continue" data-testid="continue">
+          Continue <span aria-hidden="true">→</span>
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div class="secure-note">🔒 All information you share is secure and confidential</div>
+</div>
+
+<script src="../../assets/data.js"></script>
+<script src="../../assets/solace.js"></script>
+</body>
+</html>

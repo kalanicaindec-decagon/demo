@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Member Search | Meridian Advantage Provider Portal</title>
+<link rel="stylesheet" href="../../assets/portal.css">
+</head>
+<body>
+
+<div class="masthead">
+  <div class="masthead-inner">
+    <a class="brand" href="../">
+      <div class="brand-mark">MA</div>
+      <div>
+        <div class="brand-name">Meridian Advantage Health Plan</div>
+        <div class="brand-sub">Provider &amp; Advocate Portal</div>
+      </div>
+    </a>
+    <div class="masthead-right">
+      <span class="session-chip">Session expires in <span id="session-timer">15:00</span></span>
+      <span>solace_svc &nbsp;·&nbsp; Solace Health (TIN 84-2210577)</span>
+      <a href="../">Log Out</a>
+    </div>
+  </div>
+</div>
+
+<div class="navstrip">
+  <div class="navstrip-inner">
+    <a href="./" class="is-active">Eligibility</a>
+    <a href="./">Claims</a>
+    <a href="./">Authorizations</a>
+    <a href="./">Remittance</a>
+    <a href="./">Provider Directory</a>
+    <a href="./">Resources</a>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="crumbs"><a href="../">Home</a> &rsaquo; Eligibility &rsaquo; Member Search</div>
+
+  <h1 class="page-title">Member Eligibility &amp; Claim Status</h1>
+  <p class="page-sub">
+    Search by Medicare Beneficiary Identifier to retrieve current coverage, benefit
+    detail and claim history. Results reflect data as of the last overnight load.
+  </p>
+
+  <div class="notice">
+    Batch eligibility file transfer is unavailable through this portal. Real-time
+    inquiries must be submitted individually below.
+  </div>
+
+  <div class="grid-2">
+
+    <div class="card">
+      <div class="card-head">Member Eligibility Search</div>
+      <div class="card-body">
+        <form id="member-search-form" data-testid="member-search-form" novalidate>
+          <div class="inline-error" id="search-error" data-testid="search-error" hidden></div>
+
+          <div class="field">
+            <label for="mbi">Medicare Beneficiary Identifier (MBI) <span class="req">*</span></label>
+            <input type="text" id="mbi" name="mbi" data-testid="mbi"
+                   autocomplete="off" maxlength="20" placeholder="1EG4TE5MK73">
+            <div class="hint">11 characters as printed on the member's Medicare card. Dashes optional.</div>
+          </div>
+
+          <div class="field">
+            <label for="member-last-name">Member last name</label>
+            <input type="text" id="member-last-name" name="member-last-name"
+                   data-testid="member-last-name" autocomplete="off" placeholder="Optional">
+          </div>
+
+          <div class="field">
+            <label for="member-dob">Date of birth</label>
+            <input type="text" id="member-dob" name="member-dob" data-testid="member-dob"
+                   autocomplete="off" placeholder="MM/DD/YYYY">
+          </div>
+
+          <div class="field">
+            <label for="service-date">Date of service</label>
+            <input type="text" id="service-date" name="service-date" data-testid="service-date"
+                   autocomplete="off" placeholder="Defaults to today">
+            <div class="hint">Coverage is returned as of this date.</div>
+          </div>
+
+          <button type="submit" class="btn" id="member-search-submit"
+                  data-testid="member-search-submit">Search Member</button>
+        </form>
+      </div>
+    </div>
+
+    <div>
+      <div class="card">
+        <div class="card-head">Claim Status Search</div>
+        <div class="card-body">
+          <form id="claim-search-form" data-testid="claim-search-form" novalidate>
+            <div class="inline-error" id="claim-search-error" data-testid="claim-search-error" hidden></div>
+
+            <div class="field">
+              <label for="claim-number">Claim number <span class="req">*</span></label>
+              <input type="text" id="claim-number" name="claim-number" data-testid="claim-number"
+                     autocomplete="off" placeholder="CLM-2026-084417">
+              <div class="hint">Look up a single claim directly when the number is known.</div>
+            </div>
+
+            <button type="submit" class="btn btn-secondary" id="claim-search-submit"
+                    data-testid="claim-search-submit">Search Claim</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">Demonstration Member Records</div>
+        <div class="card-body">
+          <table class="data">
+            <thead><tr><th>MBI</th><th>Member</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td><code>1EG4TE5MK73</code></td><td>Whitfield, Dolores</td><td>Active PPO</td></tr>
+              <tr><td><code>2XW9HK4NP12</code></td><td>Beaumont, Arthur</td><td>Active HMO</td></tr>
+              <tr><td><code>4TQ6MC8RV30</code></td><td>Callahan, Ruth</td><td>Terminated</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="footer">
+  Meridian Advantage Health Plan · Provider Services (855) 555-0170 · Portal v4.2.11 ·
+  Last data refresh 08/06/2026 11:42 PM ET
+</div>
+
+<script src="../../assets/data.js"></script>
+<script src="../../assets/portal.js"></script>
+</body>
+</html>

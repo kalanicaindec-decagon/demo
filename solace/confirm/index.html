@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Solace</title>
+<link rel="stylesheet" href="../../assets/solace.css">
+</head>
+<body>
+
+<div class="wizard">
+  <div class="wizard-top">
+    <a class="back-link" href="../advantage/" data-testid="back">‹ Back</a>
+    <div class="logo-mark">S</div>
+  </div>
+  <div class="progress"><div class="progress-fill" style="width:78%"></div></div>
+
+  <div class="wizard-body">
+    <form id="step-form" data-next="mbi" novalidate>
+      <h1 class="step-title">Does everything look right?</h1>
+      <p class="step-sub">
+        Make sure your name is exactly as it appears on your insurance card,
+        including middle initials or suffixes.
+      </p>
+
+      <div class="field-row">
+        <div class="s-field">
+          <label for="confirm-first-name">First Name <span class="req">*</span></label>
+          <input class="s-input" type="text" id="confirm-first-name" name="firstName"
+                 data-testid="confirm-first-name" autocomplete="off">
+        </div>
+        <div class="s-field">
+          <label for="confirm-last-name">Last Name <span class="req">*</span></label>
+          <input class="s-input" type="text" id="confirm-last-name" name="lastName"
+                 data-testid="confirm-last-name" autocomplete="off">
+        </div>
+      </div>
+
+      <div class="s-field">
+        <label for="confirm-dob">Date of birth <span class="req">*</span></label>
+        <input class="s-input" type="text" id="confirm-dob" name="dob"
+               data-testid="confirm-dob" placeholder="MM/DD/YYYY" autocomplete="off">
+      </div>
+
+      <div class="cta-wrap">
+        <button type="submit" class="cta" id="step-continue" data-testid="verify-coverage">
+          Verify My Coverage
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div class="secure-note">🔒 All information you share is secure and confidential</div>
+</div>
+
+<script src="../../assets/data.js"></script>
+<script src="../../assets/solace.js"></script>
+</body>
+</html>

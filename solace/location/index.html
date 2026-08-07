@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Solace</title>
+<link rel="stylesheet" href="../../assets/solace.css">
+</head>
+<body>
+
+<div class="wizard">
+  <div class="wizard-top">
+    <a class="back-link" href="../medicare/" data-testid="back">‹ Back</a>
+    <div class="logo-mark">S</div>
+  </div>
+  <div class="progress"><div class="progress-fill" style="width:30%"></div></div>
+
+  <div class="wizard-body">
+    <form id="step-form" data-next="checking" novalidate>
+      <h1 class="step-title">And where are you located?</h1>
+
+      <div class="s-field">
+        <label for="state">State <span class="req">*</span></label>
+        <select class="s-input" id="state" name="state" data-testid="state">
+          <option value="California" selected>California</option>
+          <option value="Arizona">Arizona</option>
+          <option value="Colorado">Colorado</option>
+          <option value="Florida">Florida</option>
+          <option value="Georgia">Georgia</option>
+          <option value="Illinois">Illinois</option>
+          <option value="Michigan">Michigan</option>
+          <option value="New Jersey">New Jersey</option>
+          <option value="New York">New York</option>
+          <option value="North Carolina">North Carolina</option>
+          <option value="Ohio">Ohio</option>
+          <option value="Pennsylvania">Pennsylvania</option>
+          <option value="Texas">Texas</option>
+          <option value="Virginia">Virginia</option>
+          <option value="Washington">Washington</option>
+        </select>
+      </div>
+
+      <div class="cta-wrap">
+        <button type="submit" class="cta" id="step-continue" data-testid="check-benefits">
+          Check My Benefits
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div class="secure-note">🔒 All information you share is secure and confidential</div>
+</div>
+
+<script src="../../assets/data.js"></script>
+<script src="../../assets/solace.js"></script>
+</body>
+</html>
