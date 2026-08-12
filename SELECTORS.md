@@ -106,18 +106,12 @@ claims. Guard for their absence.
 
 ---
 
-## Solace patient journey — replica of the captured screens
+## Solace eligibility check
 
-Entry point is `{BASE}/solace/login/`. Credentials are **not** printed on any page —
-see the table at the bottom of this file.
+Entry point is `{BASE}/solace/` — the intake form. There is no sign-in step.
 
 | Step | URL | Key selectors |
 |---|---|---|
-| "I am a…" chooser | `{BASE}/solace/login/` | `#choose-patient` `#choose-advocate` |
-| Welcome / Sign In | `{BASE}/solace/signin/` | `#sign-in` `#check-eligibility` |
-| Sign in form | `{BASE}/solace/auth/` | `#auth-email` `#auth-password` `#auth-submit` `#auth-error` |
-| Loading | `{BASE}/solace/loading/` | Auto-advances after 1.8s |
-| Nice to meet you | `{BASE}/solace/start/` | `#get-started` |
 | Intake | `{BASE}/solace/` | `#firstName` `#lastName` `#email` `#dob` `#help-for-myself` `#help-for-someone-else` `#step-continue` |
 | Medicare | `{BASE}/solace/medicare/` | `#option-yes` `#option-no` `#step-continue` |
 | Location | `{BASE}/solace/location/` | `#state` (select) `#step-continue` |
@@ -141,16 +135,17 @@ agree on plan, effective date and PCP.
 
 ## Sign-in credentials
 
-Not printed on any screen — the login pages look like the real thing.
+Only the payor portal has a login. Credentials are not printed on the page.
 
-| Surface | Username / Email | Password |
+| Surface | Username | Password |
 |---|---|---|
 | Meridian Advantage portal — `/portal/` | `solace_svc` | `Advocate2026!` |
-| Solace sign in — `/solace/auth/` | `dolores.whitfield@example.com` | `SolaceDemo2026!` |
 
-These are not secrets. There is no backend and no authentication — both forms accept
-any non-empty pair and only reject blank fields, so a mistyped password can't cost you
-a take. The values above exist so the recording is consistent, not to protect anything.
+Not a secret. There is no backend and no authentication — the form accepts any
+non-empty pair and only rejects blank fields, so a mistyped password can't cost you a
+take. The values exist so the recording is consistent, not to protect anything.
+
+The Solace flow has no sign-in.
 
 ## Seed data
 

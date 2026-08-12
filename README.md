@@ -13,12 +13,13 @@ Static HTML, CSS and vanilla JS. No build step, no dependencies, no framework.
 |---|---|
 | `index.html` | Internal launcher with seed data. Don't show this on camera. |
 | `portal/` | **Meridian Advantage Provider Portal** — the browser action target |
-| `solace/` | Replica of the captured Solace journey: chooser → sign in → eligibility wizard → covered |
-| `SELECTORS.md` | Every selector, extraction hook, and the sign-in credentials. Paste this with your recorded script. |
+| `solace/` | Replica of the find.solace.health eligibility check, intake form through coverage confirmed |
+| `SELECTORS.md` | Every selector, extraction hook, and the portal credentials. Paste this with your recorded script. |
 | `DEMO-DATA.md` | Every value you'll type while recording, both journeys, field by field. Keep it open on a second screen. |
 
-Credentials are deliberately **not** shown on any login screen — they're in
-`SELECTORS.md`. Both forms accept any non-empty pair, so nothing here is a real secret.
+Only the payor portal has a login; the Solace flow starts at the intake form. Portal
+credentials are deliberately **not** shown on the page — they're in `SELECTORS.md`.
+The form accepts any non-empty pair, so nothing here is a real secret.
 
 Meridian Advantage is fictional. Nothing here contains real member data.
 

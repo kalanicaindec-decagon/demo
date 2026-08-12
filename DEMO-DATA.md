@@ -11,14 +11,14 @@ belonging to anyone.
 
 ## Credentials
 
-Deliberately not printed on any login screen. Both forms accept **any non-empty
-pair** and only reject blank fields, so a fumbled keystroke can't cost you a take —
-the values below just keep the recording consistent.
+Only the payor portal has a login — the Solace flow starts at the intake form with no
+sign-in. Not printed on the page. The form accepts **any non-empty pair** and only
+rejects blank fields, so a fumbled keystroke can't cost you a take; the values below
+just keep the recording consistent.
 
 | Surface | User | Password |
 |---|---|---|
 | Meridian Advantage portal — `/portal/` | `solace_svc` | `Advocate2026!` |
-| Solace sign in — `/solace/auth/` | `dolores.whitfield@example.com` | `SolaceDemo2026!` |
 
 ---
 
@@ -44,30 +44,26 @@ Shortcut for the tool: `/portal/member/?mbi=1EG4TE5MK73` and
 `/portal/claim/?id=CLM-2026-091203` are both deep-linkable. Record the clicks for
 the Loom, then parameterize the URL.
 
-### Solace patient journey
+### Solace eligibility check
+
+Starts at the intake form. No sign-in.
 
 | # | Screen | Field | Value |
 |---|---|---|---|
-| 1 | `/solace/login/` | I am a… | **Patient** *(or Advocate — both continue)* |
-| 2 | `/solace/signin/` | — | click **Sign In** |
-| 3 | `/solace/auth/` | Email | `dolores.whitfield@example.com` |
-| | | Password | `SolaceDemo2026!` |
-| 4 | `/solace/loading/` | — | advances on its own after 1.8s |
-| 5 | `/solace/start/` | — | click **Get Started** |
-| 6 | `/solace/` | Who do you need help for? | **Myself** |
+| 1 | `/solace/` | Who do you need help for? | **Myself** |
 | | | First Name | `Dolores` |
 | | | Last Name | `Whitfield` |
 | | | Email | `dolores.whitfield@example.com` |
 | | | Date of Birth | `03/14/1952` |
-| 7 | `/solace/medicare/` | Do you have Medicare? | **Yes** |
-| 8 | `/solace/location/` | State | **California** |
-| 9 | `/solace/checking/` | — | advances on its own after 1.6s |
-| 10 | `/solace/advantage/` | Medicare Advantage plan? | **Yes** — she's on Meridian Advantage Choice PPO |
-| 11 | `/solace/confirm/` | First / Last / DOB | prefilled from step 6 — just confirm |
-| 12 | `/solace/mbi/` | Medicare Beneficiary Identifier | `1EG4TE5MK73` |
-| 13 | `/solace/covered/` | — | coverage confirmed |
+| 2 | `/solace/medicare/` | Do you have Medicare? | **Yes** |
+| 3 | `/solace/location/` | State | **California** |
+| 4 | `/solace/checking/` | — | advances on its own after 1.6s |
+| 5 | `/solace/advantage/` | Medicare Advantage plan? | **Yes** — she's on Meridian Advantage Choice PPO |
+| 6 | `/solace/confirm/` | First / Last / DOB | prefilled from step 1 — just confirm |
+| 7 | `/solace/mbi/` | Medicare Beneficiary Identifier | `1EG4TE5MK73` |
+| 8 | `/solace/covered/` | — | coverage confirmed |
 
-Answer **Yes** at step 10. Your original screenshots said No, but that was before
+Answer **Yes** at step 5. Your original screenshots said No, but that was before
 there was real plan data behind it — Dolores is on a Medicare Advantage PPO, and
 answering No contradicts what the portal returns two screens later.
 
