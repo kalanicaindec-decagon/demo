@@ -16,6 +16,7 @@ Static HTML, CSS and vanilla JS. No build step, no dependencies, no framework.
 | `solace/` | Replica of the find.solace.health eligibility check, intake form through coverage confirmed |
 | `SELECTORS.md` | Every selector, extraction hook, and the portal credentials. Paste this with your recorded script. |
 | `DEMO-DATA.md` | Every value you'll type while recording, both journeys, field by field. Keep it open on a second screen. |
+| `DUET-BRIEF.md` | Browser action flows and AOP scaffolding, written as a spec to hand to Duet. |
 
 Only the payor portal has a login; the Solace flow starts at the intake form. Portal
 credentials are deliberately **not** shown on the page — they're in `SELECTORS.md`.
