@@ -182,35 +182,56 @@
   document.getElementById('clearbtn').addEventListener('click', () => { input.value = ''; input.focus(); });
 
   // Intelligence layer: real Decagon widget (Logitech demo team).
-  function duetReady(){ return typeof window.duet !== 'undefined' && window.duet; }
-  function askAI(){
+  // Wait for the widget's ready handshake before any API call — calls made
+  // before isReady() resolves true can be dropped by the embedded runtime.
+  async function whenDuetReady(timeoutMs){
+    const t0 = Date.now();
+    while (Date.now() - t0 < (timeoutMs || 15000)){
+      try { if (window.duet && await window.duet.isReady()) return window.duet; } catch(e){}
+      await new Promise(r => setTimeout(r, 400));
+    }
+    return null;
+  }
+
+  async function askAI(){
     const q = input.value.trim() || 'how do I return my mouse?';
-    const d = window.duet;
+    const d = await whenDuetReady(8000);
     if (!d){
       resultsEl.insertAdjacentHTML('afterbegin','<div class="state">Decagon widget is still loading — try again in a second.</div>');
       return;
     }
     try { d.setMetadata && d.setMetadata({ origin:'search_prototype', search_query:q, page_url:location.href }); } catch(e){}
-    try {
-      if (d.sendMessage) d.sendMessage(q);
-      else if (d.setInitialUserMessage) d.setInitialUserMessage(q);
-    } catch(e){}
     try { d.open && d.open(); } catch(e){}
+    // Open first, land in a fresh conversation, then send — sequenced so the
+    // message arrives after the panel and conversation exist.
+    setTimeout(() => {
+      try { d.startNewConversation && d.startNewConversation(); } catch(e){}
+      setTimeout(() => {
+        try {
+          if (d.sendMessage) d.sendMessage(q);
+          else if (d.setInitialUserMessage) d.setInitialUserMessage(q);
+        } catch(e){}
+      }, 500);
+    }, 700);
   }
   document.getElementById('askai').addEventListener('click', askAI);
 
-  // Proactive trigger demo: once the widget is up, offer help quoting the query (UC6 "dynamically offer").
-  let triggerTries = 0;
-  const triggerTimer = setInterval(() => {
-    triggerTries++;
-    if (duetReady()){
-      clearInterval(triggerTimer);
-      try {
-        const q = input.value.trim();
-        window.duet.setTriggerMessage && window.duet.setTriggerMessage('Need help with “' + q + '”? Ask our AI — I can give you an instant answer.', true);
-      } catch(e){}
-    } else if (triggerTries > 40){ clearInterval(triggerTimer); }
-  }, 500);
+  // Once ready: fire the proactive trigger (UC6 "dynamically offer") and keep the
+  // composer prefilled with the current query, so even opening the launcher
+  // directly carries the search over.
+  (async function(){
+    const d = await whenDuetReady();
+    if (!d) return;
+    const q0 = input.value.trim();
+    try { d.setTriggerMessage && d.setTriggerMessage('Need help with “' + q0 + '”? Ask our AI — I can give you an instant answer.', true); } catch(e){}
+    const prefill = () => {
+      const q = input.value.trim();
+      if (q.length > 2){ try { d.setInitialUserMessage && d.setInitialUserMessage(q); } catch(e){} }
+    };
+    prefill();
+    let pf;
+    input.addEventListener('input', () => { clearTimeout(pf); pf = setTimeout(prefill, 600); });
+  })();
 
   runSearch();
 </script>
