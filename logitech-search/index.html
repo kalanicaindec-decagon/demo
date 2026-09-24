@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Logitech help center search — live prototype (real Guide API + Decagon widget)</title>
+<style>
+  :root{
+    --dg-black:#0A0A0B; --dg-indigo:#5754FF; --dg-indigo-800:#443DDA;
+    --dg-indigo-100:#EEEEFF; --dg-indigo-200:#D7D6FF;
+    --dg-plat-100:#F4F4F5; --dg-plat-200:#EAEAEC; --dg-plat-600:#898994; --dg-plat-800:#4E4E56;
+    --lg-ink:#111; --lg-gray:#8a8a8f; --lg-line:#e8e8ea; --lg-blue:#00a3e0;
+    --font:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--font);background:#fff;color:var(--lg-ink);min-height:100vh;overflow-x:hidden}
+
+  header.site{display:flex;align-items:center;justify-content:space-between;padding:18px 28px;background:#fff;position:relative;z-index:1}
+  .burger{width:26px;display:flex;flex-direction:column;gap:6px}
+  .burger span{height:2px;background:#111;border-radius:2px}
+  .wordmark{font-size:26px;font-weight:700;letter-spacing:-0.5px;position:absolute;left:50%;transform:translateX(-50%)}
+  .hero{height:340px;background:linear-gradient(120deg,#d9dde2,#eef0f2 55%,#e2e6ea)}
+  .backdrop{position:fixed;inset:0;background:rgba(255,255,255,.55);backdrop-filter:blur(2px);z-index:5}
+
+  .search-modal{position:fixed;top:88px;left:50%;transform:translateX(-50%);width:min(92vw,780px);
+    background:#fff;border-radius:20px;box-shadow:0 24px 64px rgba(17,17,17,.16),0 2px 8px rgba(17,17,17,.08);
+    z-index:10;padding:8px 0 4px;max-height:calc(100vh - 130px);display:flex;flex-direction:column}
+  .search-row{display:flex;align-items:center;gap:14px;padding:14px 22px;border-bottom:1px solid var(--lg-line)}
+  .search-row input{flex:1;border:0;outline:0;font-size:19px;font-family:var(--font);color:var(--lg-ink)}
+  .close-btn{width:34px;height:34px;border-radius:50%;border:0;background:var(--dg-plat-100);cursor:pointer;
+    display:flex;align-items:center;justify-content:center;font-size:15px;color:#555}
+
+  .tabs{display:flex;gap:10px;padding:16px 22px 6px}
+  .tab{padding:9px 18px;border-radius:10px;border:1px solid var(--lg-line);background:#fff;font-size:14px;cursor:pointer;font-family:var(--font)}
+  .tab.active{background:#0d3050;color:#fff;border-color:#0d3050}
+
+  .ask-ai{margin:14px 22px 4px;display:flex;align-items:center;gap:14px;padding:15px 18px;
+    background:var(--dg-indigo-100);border:1px solid var(--dg-indigo-200);border-radius:14px;cursor:pointer;
+    transition:box-shadow .15s ease, transform .15s ease}
+  .ask-ai:hover{box-shadow:0 4px 16px rgba(87,84,255,.22);transform:translateY(-1px)}
+  .ask-ai .spark{flex:none;width:38px;height:38px;border-radius:11px;background:var(--dg-indigo);display:flex;align-items:center;justify-content:center}
+  .ask-ai .txt .eyebrow{font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--dg-indigo-800);text-transform:uppercase}
+  .ask-ai .txt .line{font-size:15.5px;color:var(--dg-black);margin-top:2px}
+  .ask-ai .go{margin-left:auto;flex:none;width:34px;height:34px;border-radius:50%;background:var(--dg-indigo);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:16px}
+
+  .meta-line{padding:10px 26px 2px;font-size:12.5px;color:var(--lg-gray)}
+  .results{overflow-y:auto;padding:2px 0 0;min-height:120px}
+  .result{display:flex;align-items:flex-start;gap:18px;padding:18px 26px;border-bottom:1px solid var(--lg-line);cursor:pointer}
+  .result:hover{background:#fafafa}
+  .result .ric{flex:none;width:44px;display:flex;align-items:center;justify-content:center;padding-top:2px}
+  .result .title{font-size:16px;line-height:1.45}
+  .result .title em, .result .snip em{font-style:normal;color:var(--lg-blue);font-weight:600}
+  .result .snip{font-size:13px;color:var(--lg-gray);margin-top:5px;line-height:1.5}
+  .state{padding:26px;font-size:14px;color:var(--lg-gray);text-align:center}
+  .view-more{display:block;text-align:center;padding:16px;color:#0d3050;font-size:15px;text-decoration:none;font-weight:600}
+
+  .concept-tag{position:fixed;left:18px;top:18px;z-index:30;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--dg-plat-800);background:#fff;border:1px solid var(--dg-plat-200);border-radius:6px;padding:5px 9px}
+</style>
+</head>
+<body>
+
+<div class="concept-tag">Live prototype — real Logitech KB via Zendesk Guide API</div>
+
+<header class="site">
+  <div class="burger"><span></span><span></span><span></span></div>
+  <div class="wordmark">logitech</div>
+  <div style="width:26px"></div>
+</header>
+<div class="hero"></div>
+<div class="backdrop"></div>
+
+<!-- Thin search UI: list layer = Zendesk Guide search API, intelligence layer = Decagon (Ask AI) -->
+<div class="search-modal" role="dialog" aria-label="Search">
+  <div class="search-row">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.8-3.8"/></svg>
+    <input id="search_input" role="search" autocomplete="off" name="search" aria-label="How can we help you?"
+           placeholder="How can we help you?" value="how do I return my mouse?">
+    <button class="close-btn" aria-label="Clear" id="clearbtn">&#10005;</button>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active">All Results</button>
+    <button class="tab" title="Cosmetic in this prototype — production maps tabs to Guide label/section filters">Products</button>
+    <button class="tab" title="Cosmetic in this prototype — production maps tabs to Guide label/section filters">Knowledge Base</button>
+    <button class="tab" title="Cosmetic in this prototype — production maps tabs to Guide label/section filters">Downloads</button>
+  </div>
+
+  <div class="ask-ai" id="askai" role="button" aria-label="Ask AI">
+    <div class="spark">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3l1.9 5.3L19 10l-5.1 1.7L12 17l-1.9-5.3L5 10l5.1-1.7L12 3z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15z"/></svg>
+    </div>
+    <div class="txt">
+      <div class="eyebrow">Ask AI</div>
+      <div class="line" id="askai_line">Get an instant, cited answer to this question</div>
+    </div>
+    <div class="go">&#8594;</div>
+  </div>
+
+  <div class="meta-line" id="metaline"></div>
+  <div class="results" id="results"><div class="state">Searching Logitech&rsquo;s knowledge base&hellip;</div></div>
+  <a class="view-more" id="viewmore" href="#" target="_blank" rel="noopener">View more &#8250;</a>
+</div>
+
+<script>
+  const input = document.getElementById('search_input');
+  const resultsEl = document.getElementById('results');
+  const metaEl = document.getElementById('metaline');
+  const viewMore = document.getElementById('viewmore');
+
+  const DOC_ICON = '<svg width="34" height="42" viewBox="0 0 34 42" fill="none" stroke="#b9bdc4" stroke-width="1.6"><rect x="2" y="2" width="30" height="38" rx="4"/><path d="M9 12h16M9 19h16M9 26h10"/></svg>';
+
+  function esc(s){ const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
+
+  // Zendesk snippets arrive with <em> around matched terms; allow only that tag.
+  function safeSnippet(s){ return esc(s).replaceAll('&lt;em&gt;','<em>').replaceAll('&lt;/em&gt;','</em>'); }
+
+  function highlight(title, q){
+    let out = esc(title);
+    const terms = (q || '').split(/\s+/).map(t => t.replace(/[^\w]/g,'')).filter(t => t.length > 2);
+    for (const t of terms){
+      out = out.replace(new RegExp('(' + t + ')','ig'), '<em>$1</em>');
+    }
+    return out;
+  }
+
+  // List layer: Zendesk Guide public search API. Same-origin proxy first (serve_live.py),
+  // then direct — the direct call works wherever Zendesk's CORS headers allow it.
+  async function zsearch(q){
+    const params = new URLSearchParams({query:q, locale:'en-us', per_page:'8'});
+    // Zendesk's help-center search API sends permissive CORS headers, so the direct call
+    // works from any origin (verified live); /zsearch is a fallback for the local proxy server.
+    const urls = ['https://support.logi.com/api/v2/help_center/articles/search.json?' + params, '/zsearch?' + params];
+    let lastErr;
+    for (const u of urls){
+      try {
+        const r = await fetch(u);
+        if (r.ok){ const j = await r.json(); if (j && j.results) return j; }
+        lastErr = new Error('HTTP ' + r.status);
+      } catch(e){ lastErr = e; }
+    }
+    throw lastErr || new Error('search unavailable');
+  }
+
+  let seq = 0;
+  async function runSearch(){
+    const q = input.value.trim();
+    if (q.length < 3) return;
+    const my = ++seq;
+    resultsEl.innerHTML = '<div class="state">Searching Logitech&rsquo;s knowledge base&hellip;</div>';
+    metaEl.textContent = '';
+    document.getElementById('askai_line').textContent = 'Get an instant, cited answer to this question';
+    viewMore.href = 'https://support.logi.com/hc/en-us/search?query=' + encodeURIComponent(q);
+    try {
+      const data = await zsearch(q);
+      if (my !== seq) return; // stale response
+      metaEl.textContent = data.count + ' results from support.logi.com — Zendesk Guide search API';
+      if (!data.results.length){
+        resultsEl.innerHTML = '<div class="state">No results — a strong signal to offer Ask AI.</div>';
+        return;
+      }
+      resultsEl.innerHTML = data.results.map(r =>
+        '<div class="result" data-url="' + esc(r.html_url) + '">' +
+          '<div class="ric">' + DOC_ICON + '</div>' +
+          '<div><div class="title">' + highlight(r.title, q) + '</div>' +
+          (r.snippet ? '<div class="snip">' + safeSnippet(r.snippet) + '</div>' : '') +
+          '</div></div>'
+      ).join('');
+      resultsEl.querySelectorAll('.result').forEach(el =>
+        el.addEventListener('click', () => window.open(el.dataset.url, '_blank', 'noopener')));
+    } catch(e){
+      if (my !== seq) return;
+      resultsEl.innerHTML = '<div class="state">Could not reach the Guide API (' + esc(String(e)) +
+        ').<br>Serve this page with serve_live.py so /zsearch can proxy the request.</div>';
+    }
+  }
+
+  let deb;
+  input.addEventListener('input', () => { clearTimeout(deb); deb = setTimeout(runSearch, 450); });
+  input.addEventListener('keydown', e => { if (e.key === 'Enter'){ e.preventDefault(); runSearch(); } });
+  document.getElementById('clearbtn').addEventListener('click', () => { input.value = ''; input.focus(); });
+
+  // Intelligence layer: real Decagon widget (Logitech demo team).
+  function duetReady(){ return typeof window.duet !== 'undefined' && window.duet; }
+  function askAI(){
+    const q = input.value.trim() || 'how do I return my mouse?';
+    const d = window.duet;
+    if (!d){
+      resultsEl.insertAdjacentHTML('afterbegin','<div class="state">Decagon widget is still loading — try again in a second.</div>');
+      return;
+    }
+    try { d.setMetadata && d.setMetadata({ origin:'search_prototype', search_query:q, page_url:location.href }); } catch(e){}
+    try {
+      if (d.sendMessage) d.sendMessage(q);
+      else if (d.setInitialUserMessage) d.setInitialUserMessage(q);
+    } catch(e){}
+    try { d.open && d.open(); } catch(e){}
+  }
+  document.getElementById('askai').addEventListener('click', askAI);
+
+  // Proactive trigger demo: once the widget is up, offer help quoting the query (UC6 "dynamically offer").
+  let triggerTries = 0;
+  const triggerTimer = setInterval(() => {
+    triggerTries++;
+    if (duetReady()){
+      clearInterval(triggerTimer);
+      try {
+        const q = input.value.trim();
+        window.duet.setTriggerMessage && window.duet.setTriggerMessage('Need help with “' + q + '”? Ask our AI — I can give you an instant answer.', true);
+      } catch(e){}
+    } else if (triggerTries > 40){ clearInterval(triggerTimer); }
+  }, 500);
+
+  runSearch();
+</script>
+
+<!-- Decagon Logitech demo widget -->
+<script src="https://decagon.ai/loaders/release/base/v1.js" data-slug="g9lqagB_logitech"></script>
+</body>
+</html>
