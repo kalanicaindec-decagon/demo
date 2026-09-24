@@ -181,6 +181,26 @@
   input.addEventListener('keydown', e => { if (e.key === 'Enter'){ e.preventDefault(); runSearch(); } });
   document.getElementById('clearbtn').addEventListener('click', () => { input.value = ''; input.focus(); });
 
+  // Verified user identity for the demo (the widget's conversation-init gate
+  // requires userId + userIdAuth before it will start a conversation).
+  // The signature below is a precomputed HMAC for this one identity with a
+  // 28-day expiry — the signing key itself is NOT in this page.
+  const DEMO_USER_ID = 'kalani.caindec@decagon.ai';
+  const DEMO_SIG = '20eed058f22bfb2ae3833fb1b83772c33f64f9a98b41657e91688c05f9a1adcf';
+  const DEMO_EPOCH = 1792700395;
+
+  // Send identity the moment the loader API exists — the init gate is
+  // waiting on it, so this must not wait for isReady().
+  (function sendIdentity(tries){
+    const d = window.duet;
+    if (d){
+      try { d.setUserId && d.setUserId(DEMO_USER_ID); } catch(e){}
+      try { d.setUserIdAuth && d.setUserIdAuth(DEMO_SIG, DEMO_EPOCH); } catch(e){}
+      return;
+    }
+    if ((tries || 0) < 60) setTimeout(() => sendIdentity((tries || 0) + 1), 300);
+  })(0);
+
   // Intelligence layer: real Decagon widget (Logitech demo team).
   // Wait for the widget's ready handshake before any API call — calls made
   // before isReady() resolves true can be dropped by the embedded runtime.
