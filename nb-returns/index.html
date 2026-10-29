@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>New Balance · Your return label</title>
+<meta name="robots" content="noindex">
+<style>
+  :root { --nb-red:#CF0A2C; --ink:#111; --muted:#666; --line:#e6e6e6; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif; color:var(--ink); background:#f4f4f4; }
+  header { background:#111; color:#fff; padding:16px 20px; display:flex; align-items:center; gap:10px; }
+  header .mark { font-weight:900; font-style:italic; font-size:22px; letter-spacing:-1px; color:#fff; }
+  header .mark span { color:var(--nb-red); }
+  header .t { font-size:14px; opacity:.8; }
+  main { max-width:480px; margin:0 auto; padding:18px 16px 40px; }
+  .card { background:#fff; border-radius:14px; padding:20px; box-shadow:0 1px 3px rgba(0,0,0,.08); margin-bottom:14px; }
+  .pill { display:inline-block; font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase;
+          background:var(--nb-red); color:#fff; padding:4px 10px; border-radius:999px; }
+  h1 { font-size:24px; margin:12px 0 4px; }
+  .sub { color:var(--muted); font-size:15px; margin:0; }
+  .code { font-family:ui-monospace,Menlo,monospace; font-size:22px; font-weight:700; letter-spacing:.06em; text-align:center; margin:14px 0 6px; }
+  .barcode { display:flex; justify-content:center; align-items:stretch; height:84px; gap:0; margin:8px auto 0; }
+  .barcode i { display:block; background:#111; }
+  .row { display:flex; justify-content:space-between; padding:10px 0; border-top:1px solid var(--line); font-size:15px; }
+  .row:first-of-type { border-top:0; }
+  .row b { font-weight:600; }
+  ol { padding-left:20px; margin:8px 0 0; line-height:1.6; font-size:15px; }
+  .btn { display:block; text-align:center; background:#111; color:#fff; text-decoration:none; font-weight:700;
+         padding:14px; border-radius:10px; margin-top:12px; }
+  .btn.alt { background:#fff; color:#111; border:1.5px solid #111; }
+  .fine { color:var(--muted); font-size:12px; text-align:center; margin-top:18px; }
+</style>
+</head>
+<body>
+<header><div class="mark">N<span>B</span></div><div class="t">New Balance · Returns</div></header>
+<main>
+  <div class="card">
+    <span class="pill" id="pill">Return label</span>
+    <h1 id="title">Your return is ready</h1>
+    <p class="sub" id="lead">Show this screen at drop-off. No box label or printer needed.</p>
+    <div class="code" id="code">NBRET-00000000</div>
+    <div class="barcode" id="barcode" aria-label="barcode"></div>
+  </div>
+  <div class="card">
+    <div class="row"><span>Item</span><b id="item">Your New Balance order</b></div>
+    <div class="row"><span>Drop off at</span><b id="where">Any UPS or USPS location</b></div>
+    <div class="row" id="valueRow" hidden><span id="valueLabel">Voucher</span><b id="value"></b></div>
+    <div class="row"><span>Status</span><b id="status">Label active</b></div>
+  </div>
+  <div class="card">
+    <b>How it works</b>
+    <ol id="steps">
+      <li>Pack the shoes in any box or bag.</li>
+      <li>Bring them to the drop-off location with this screen.</li>
+      <li>They scan the code, and you get an email receipt.</li>
+    </ol>
+    <a class="btn" id="mapBtn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/UPS+or+USPS+near+me">Find a drop-off near me</a>
+    <a class="btn alt" href="https://www.newbalance.com/" target="_blank" rel="noopener">Back to newbalance.com</a>
+  </div>
+  <p class="fine">Demo page for a Decagon × New Balance concept. Not a real shipping label.</p>
+</main>
+<script>
+  const q = new URLSearchParams(location.search);
+  const type = (q.get("t") || "return").toLowerCase();
+  const code = q.get("code") || "NBRET-00000000";
+  const item = q.get("item");
+  const carrier = q.get("carrier");
+  const value = q.get("value");
+  const store = q.get("store");
+  const $ = (id) => document.getElementById(id);
+  $("code").textContent = code;
+  if (item) $("item").textContent = item;
+  if (carrier) { $("where").textContent = "Any " + carrier + " location"; $("mapBtn").href = "https://www.google.com/maps/search/" + encodeURIComponent(carrier + " near me"); }
+  if (type === "exchange") {
+    $("pill").textContent = "Exchange"; $("title").textContent = "Your new pair ships today";
+    $("lead").textContent = "Send the original pair back with this code. No box label or printer needed.";
+    $("status").textContent = "Replacement shipping";
+  } else if (type === "store") {
+    $("pill").textContent = "In-store return"; $("title").textContent = "Return it in store";
+    $("lead").textContent = "Show this code at the counter. Your refund goes back to your original payment.";
+    $("where").textContent = store || "Any New Balance store";
+    $("mapBtn").href = "https://www.google.com/maps/search/" + encodeURIComponent((store || "New Balance store") + " near me");
+    $("mapBtn").textContent = "Directions to the store";
+    $("steps").innerHTML = "<li>Bring the shoes to the store.</li><li>Show this code at the counter.</li><li>Your refund is issued on the spot.</li>";
+  } else if (type === "tradein") {
+    $("pill").textContent = "NB Reconsidered"; $("title").textContent = "Your trade-in is ready";
+    $("lead").textContent = "Show this code when you drop off your shoes. They'll be resold through Reconsidered or donated to Soles4Souls.";
+    $("where").textContent = store || "Any New Balance store";
+    $("mapBtn").href = "https://www.google.com/maps/search/" + encodeURIComponent((store || "New Balance store") + " near me");
+    $("mapBtn").textContent = "Find a New Balance store";
+    $("steps").innerHTML = "<li>Bring your old pair to a New Balance store.</li><li>Show this code at the counter.</li><li>Your voucher is good on your next pair.</li>";
+  }
+  if (value) { $("valueRow").hidden = false; $("value").textContent = value; if (type !== "tradein") $("valueLabel").textContent = "Refund"; }
+  // Deterministic decorative barcode from the code string (not a scannable symbology).
+  const bars = $("barcode"); let seed = 0;
+  for (const ch of code) seed = (seed * 31 + ch.charCodeAt(0)) >>> 0;
+  for (let i = 0; i < 64; i++) {
+    seed = (seed * 1103515245 + 12345) >>> 0;
+    const w = 1 + (seed % 3), gap = 1 + ((seed >> 3) % 2);
+    const b = document.createElement("i"); b.style.width = w + "px"; b.style.marginRight = gap + "px"; bars.appendChild(b);
+  }
+</script>
+</body>
+</html>
